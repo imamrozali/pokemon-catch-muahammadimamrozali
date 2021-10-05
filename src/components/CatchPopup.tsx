@@ -1,15 +1,14 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
-import { IPokemon } from "../types/IPokemon";
-import { capitalizeEachWord } from "../utils/strings";
-import Button from "./Button";
+import { capitalizeEachWord } from "../utils/strings"
 import Card from "./Card";
 import NamingForm from "./NamingForm";
 import Pokeball from "./Pokeball";
+import { storePokemons } from './../utils/store.type';
 
 interface Props {
   exitCatching: () => any;
-  pokemon: IPokemon;
+  pokemon: storePokemons;
 }
 
 const Container = styled.div`
@@ -70,6 +69,7 @@ const CatchPopup: React.FC<Props> = (props) => {
       title = "Failed to catch " + name;
       break;
   }
+console.log(title, "name title");
 
   const handle = {
     tryAgain: () => {
@@ -88,10 +88,10 @@ const CatchPopup: React.FC<Props> = (props) => {
           )}
           {catchState === "FAILED" && (
             <ButtonContainer>
-              <Button size="lg" color="primary" onClick={handle.tryAgain}>
+              <button onClick={handle.tryAgain}>
                 Try Again
-              </Button>
-              <Button onClick={props.exitCatching}>Go Back</Button>
+              </button>
+              <button onClick={props.exitCatching}>Go Back</button>
             </ButtonContainer>
           )}
         </ContentContainer>

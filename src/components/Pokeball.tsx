@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
-import { IPokemon } from "../types/IPokemon";
+import { storePokemons } from "../utils/store.type";
 import { getRandomBoolean, getRandomTimeout } from "../utils/random";
 import { bounce, shake } from "../utils/animation";
 import { TCatchState } from "./CatchPopup";
@@ -9,7 +9,7 @@ import CheckCircle from "./CheckCircle";
 import PokemonImage from "./PokemonImage";
 
 interface Props {
-  pokemon: IPokemon;
+  pokemon: storePokemons;
   catchState: TCatchState;
   setCatchState: (catchState: TCatchState) => any;
 }
@@ -84,7 +84,7 @@ const Pokeball: React.FC<Props> = (props) => {
       {props.catchState === "SUCCESS" && <CheckCircle />}
       {props.catchState === "CATCHING" ? (
         <>
-          <img src="pokeball.png" className="pokeball"  alt="pokeball" />
+          <img className="pokeball" src="/pokeball.png" alt="pokeball" />
           <Shadow />
         </>
       ) : (

@@ -1,20 +1,15 @@
-import styled from "@emotion/styled";
-import LoadedImage from './LoadedImage';
-import Spinner from './Spinner';
 import React from "react";
+import styled from '@emotion/styled'
+import LoadedImage from './LoadedImage'
+import Spinner from './Spinner';
 
 interface Props {
-  src: string;
-  alt: string;
-  withoutBackground?: boolean;
+  src: string
+  alt: string
+  withoutBackground?: boolean
 }
 
-interface ContainerProps {
-  withoutBackground?: boolean;
-}
-const Container = styled.div<ContainerProps>`
-  ${(props) => !props.withoutBackground && `background: rgba(45, 50, 104, 0.13);`}
-  border-radius: 100%;
+const Container = styled.div`
   width: 100%;
   & img {
     width: 100%;
@@ -37,6 +32,7 @@ const ImageContainer = styled.div`
     left: 0;
   }
 `;
+
 const ImageNotFound = styled.div`
   text-align: center;
   height: 175px;
@@ -52,14 +48,14 @@ const PokemonImage: React.FC<Props> = (props) => {
     return <ImageNotFound>Image Not Found</ImageNotFound>;
   }
   return (
-    <Container withoutBackground={props.withoutBackground}>
+    <Container>
       <ImageContainer>
         {hasError && <div>error</div>}
         {!hasLoaded && <Spinner size={70} />}
         {hasLoaded && <img src={props.src} alt={props.alt} data-testid="pokemon-image" />}
       </ImageContainer>
     </Container>
-  );
-};
+  )
+}
 
-export default PokemonImage;
+export default PokemonImage

@@ -1,12 +1,11 @@
 import styled from "@emotion/styled";
-import { AppContext } from "../context/context";
-import { useActions } from "../context/useActions";
+import { AppContext } from "../utils/app.state"
+import { Actions } from "../utils/actions"
 import React, { useContext, useState } from "react";
-import { IPokemon } from "../types/IPokemon";
-import Button from "./Button";
+import { storePokemons } from './../utils/store.type';
 
 interface Props {
-  pokemon: IPokemon;
+  pokemon: storePokemons;
   onDone: () => any;
 }
 
@@ -45,7 +44,7 @@ const TextError = styled.div`
 
 const NamingForm: React.FC<Props> = (props) => {
   const { state, dispatch } = useContext(AppContext);
-  const { addToMyPokemon } = useActions(state, dispatch);
+  const { addToMyPokemon } = Actions(state, dispatch);
 
   const [inputName, setInputName] = useState("");
   const [inputError, setInputError] = useState("");
@@ -83,9 +82,9 @@ const NamingForm: React.FC<Props> = (props) => {
         role="input"
       />
       {inputError && <TextError>{inputError}</TextError>}
-      <Button size="lg" color="primary">
+      <button>
         OK
-      </Button>
+      </button>
     </Form>
   );
 };

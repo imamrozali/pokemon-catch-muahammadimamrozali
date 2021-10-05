@@ -1,5 +1,5 @@
 export const normalizeMoveName = (name: string) => {
-  const result = name.replace("-", " ");
+  let result = name.replace("-", " ");
 
   return capitalizeEachWord(result);
 };

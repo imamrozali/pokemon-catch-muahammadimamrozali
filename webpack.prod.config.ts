@@ -61,12 +61,7 @@ const config: Configuration = {
       patterns: [
         { from: `${PUBLIC}/manifest.webmanifest`, to: 'manifest.webmanifest' },
         { from: `${PUBLIC}/icon.png`, to: 'favicon.png' },
-        { from: `${PUBLIC}/pokemon-logo.png`, to: 'logo.png' },
         { from: `${PUBLIC}/robots.txt`, to: 'robots.txt' },
-        { from: `${PUBLIC}/pokeball.png`, to: 'pokeball.png' },
-        { from: `${PUBLIC}/x-black.svg`, to: 'close.svg' },
-        { from: `${PUBLIC}/arrow.svg`, to: 'arrow.svg' },
-        { from: `${PUBLIC}/check.svg`, to: 'check.svg' },
       ]
     }),
   ],

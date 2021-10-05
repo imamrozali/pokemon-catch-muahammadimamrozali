@@ -1,38 +1,21 @@
-import styled from "@emotion/styled";
-import Navbar from "./components/Navbar";
-import { AppContext } from "./context/context";
-import React, { useContext } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Main from "./pages/Main";
-import MyPokemon from "./pages/MyPokemon";
-import NotFound from "./pages/NotFound";
-import PokemonDetail from "./pages/PokemonDetail";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ListPokemon from './pages/ListPokemon';
+import DetailPokemon from './pages/DetailPokemon';
+import React, { Fragment } from "react";
 
-const Container = styled.div`
-    background: url("/bg.png") no-repeat center center fixed;
-    background-size: 100vw calc(100vh + 60px);
-    min-height: 100vh;
-    padding-top: 90px;
-`;
-
-const App: React.FC<any> = (props) => {
-    const { state } = useContext(AppContext);
-
+const App = () => {
     return (
-        <Container>
+        <Fragment>
             <BrowserRouter>
-                <Navbar />
-                {state.showMyPokemon && <MyPokemon />}
-
                 <Switch>
-                    <Route exact path="/" component={Main} />
-                    <Route exact path="/mypokemon" component={Main} />
-                    <Route exact path="/pokemon/:name" component={PokemonDetail} />
-                    <Route path="/" component={NotFound} />
+                    <Route exact path="/" component={ListPokemon} />
+                    <Route exact path="/my-pokemon" />
+                    <Route exact path="/detail-pokemon/:name" component={DetailPokemon} />
+                    <Route path="/" component={ListPokemon} />
                 </Switch>
             </BrowserRouter>
-        </Container>
-    );
-};
+        </Fragment>
+    )
+}
 
-export default App;
+export default App

@@ -1,10 +1,10 @@
-import { ApolloProvider } from "@apollo/client";
-import { AppProvider } from "./context/context";
 import React from "react";
 import ReactDOM from "react-dom";
-import client from "./api/client";
-import App from "./App";
-import "./injectGlobalStyle";
+import client from './graphql/client';
+import { ApolloProvider } from '@apollo/client';
+import { AppProvider } from './utils/app.state';
+import App from './App';
+import './injectGlobalStyle'
 
 ReactDOM.render(
   <React.StrictMode>
