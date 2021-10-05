@@ -1,7 +1,9 @@
 import path from "path";
-import { Configuration, HotModuleReplacementPlugin } from "webpack";
+import { Configuration } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import ESLintPlugin from "eslint-webpack-plugin";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import WorkboxPlugin from 'workbox-webpack-plugin';
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -9,11 +11,13 @@ const PUBLIC = path.resolve(__dirname, 'public')
 const SRC = path.resolve(__dirname, 'src')
 
 const config: Configuration = {
-  mode: "development",
-  output: {
-    publicPath: "/",
-  },
+  mode: "production",
   entry: `${SRC}/index.tsx`,
+  output: {
+    path: path.resolve(__dirname, "build"),
+    filename: "[name].[contenthash].js",
+    publicPath: "",
+  },
   module: {
     rules: [
       {
@@ -30,10 +34,6 @@ const config: Configuration = {
           },
         },
       },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: 'file-loader',
-      },
     ],
   },
   resolve: {
@@ -44,11 +44,13 @@ const config: Configuration = {
       template: `${PUBLIC}/index.html`,
       favicon: `${PUBLIC}/icon.png`
     }),
-    new HotModuleReplacementPlugin(),
     new ForkTsCheckerWebpackPlugin({
       async: false,
     }),
-
+    new ESLintPlugin({
+      extensions: ["js", "jsx", "ts", "tsx"],
+    }),
+    new CleanWebpackPlugin(),
     new WorkboxPlugin.GenerateSW({
       maximumFileSizeToCacheInBytes: 500000000,
       clientsClaim: true,
@@ -68,14 +70,6 @@ const config: Configuration = {
       ]
     }),
   ],
-  devtool: "inline-source-map",
-  devServer: {
-    static: path.join(__dirname, "build"),
-    historyApiFallback: true,
-    port: 4000,
-    open: true,
-    hot: true,
-  },
 };
 
 export default config;
