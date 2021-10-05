@@ -7,8 +7,15 @@
 /coverage
 
 # production
-/build
-
+/public
+/src
+.babelrc
+.eslintrc.json
+package.lock.json
+package.json
+tsconfig.json
+webpack.dev.config.ts
+webpack.prod.config.ts
 # misc
 .DS_Store
 .env.local
